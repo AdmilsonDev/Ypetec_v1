@@ -1,0 +1,12 @@
+{% load static %}
+<article class="info-card info-card--{{ variant }}">
+  <img class="info-card__icon" src="{% static icon %}" alt="" width="104" height="104">
+  <h3 class="info-card__title">{{ title }}</h3>
+  <p class="info-card__text">{{ text }}</p>
+  {% if href %}
+    <a class="info-card__link" href="{{ href }}" target="_blank" rel="noopener">
+      <span>Acessar Canal<span class="visually-hidden">: {{ title }}</span></span>
+      <img src="{% static 'images/about/arrow-external.svg' %}" alt="" width="20.33" height="20.33">
+    </a>
+  {% endif %}
+</article>

@@ -1,4 +1,6 @@
-﻿SITE = {
+﻿from django.conf import settings
+
+SITE = {
     "phone_display": "+(55) 64 3611 2200",
     "phone_footer": "(64) 3611 2200",
     "phone_href": "tel:+556436112200",
@@ -35,11 +37,20 @@ NAV_ITEMS = [
 ]
 
 
+def _asset_version():
+    """Versão dos assets (mtime do main.css) para invalidar o cache do navegador."""
+    try:
+        return int((settings.BASE_DIR / "static" / "css" / "main.css").stat().st_mtime)
+    except OSError:
+        return 0
+
+
 def site(request):
     match = getattr(request, "resolver_match", None)
     active = match.url_name if match and match.namespace == "core" else None
     return {
         "site": SITE,
+        "asset_version": _asset_version(),
         "nav_items": [
             {"route": f"core:{name}", "label": label, "active": name == active}
             for name, label in NAV_ITEMS

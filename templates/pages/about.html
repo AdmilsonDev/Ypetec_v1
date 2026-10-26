@@ -1,7 +1,77 @@
 {% extends "layouts/public.html" %}
+{% load static %}
 
 {% block title %}Sobre | Ypetec{% endblock %}
 
 {% block content %}
-  {% include "components/page_placeholder.html" with title="Sobre" %}
+  <section class="page-hero" aria-labelledby="page-hero-title">
+    <img class="page-hero__image" src="{% static 'images/about/page-hero-about.png' %}" alt="" width="1014" height="235">
+    <div class="page-hero__content">
+      <h1 class="page-hero__title" id="page-hero-title">Sobre a incubadora</h1>
+      <nav class="breadcrumb" aria-label="Você está em">
+        <ol class="breadcrumb__list">
+          <li><a class="breadcrumb__item" href="{% url 'core:home' %}">Home</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true">&gt;</li>
+          <li><a class="breadcrumb__item breadcrumb__item--current" href="{% url 'core:about' %}" aria-current="page">Sobre</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section class="about-intro" aria-labelledby="about-title">
+    <div class="container">
+      <h2 class="section-title" id="about-title">O que somos</h2>
+      <span class="title-strokes" aria-hidden="true"></span>
+      <p class="about-intro__text">A Incubadora de Empresas da UniRV atua como ponto de encontro entre conhecimento acadêmico, empreendedorismo e demandas reais da região.</p>
+    </div>
+  </section>
+
+  <section class="pillars" aria-labelledby="pillars-title">
+    <h2 class="section-title" id="pillars-title">Pilares que nos orientam</h2>
+    <span class="title-strokes" aria-hidden="true"></span>
+    <div class="info-cards info-cards--pillars">
+      {% include "components/about_card.html" with variant="pillar" icon="images/about/pillar-method.svg" title="Empreendedorismo com método" text="A incubadora organiza a jornada para que equipes saibam o que testar, quando pivotar e como registrar aprendizados." %}
+      {% include "components/about_card.html" with variant="pillar" icon="images/about/pillar-institutional.svg" title="Apoio institucional" text="A Ypetec aproxima estudantes, docentes, pesquisadores e parceiros externos em torno de desafios reais da região." %}
+      {% include "components/about_card.html" with variant="pillar" icon="images/about/pillar-regional.svg" title="Desenvolvimento regional" text="Os projetos acompanhados devem fortalecer cadeias produtivas, serviços e novas oportunidades para Rio Verde e entorno." %}
+    </div>
+  </section>
+
+  <section class="about-band" aria-labelledby="method-title">
+    <div class="about-band__inner">
+      <div class="about-band__intro">
+        <p class="about-band__eyebrow">Método</p>
+        <h2 class="about-band__title" id="method-title">Acompanhamento simples, frequente e mensurável</h2>
+        <p class="about-band__text">Cada ciclo combina diagnóstico, planejamento, execução e conexões. A equipe sabe quais entregas priorizar e como demonstrar evolução.</p>
+      </div>
+
+      <ol class="method-steps">
+        <li class="method-steps__item">
+          <h3 class="method-steps__title">Diagnosticar</h3>
+          <p class="method-steps__text">Entender maturidade, equipe, oportunidade e principais riscos do projeto.</p>
+        </li>
+        <li class="method-steps__item">
+          <h3 class="method-steps__title">Planejar</h3>
+          <p class="method-steps__text">Definir metas curtas, entregas esperadas e mentorias prioritárias.</p>
+        </li>
+        <li class="method-steps__item">
+          <h3 class="method-steps__title">Executar</h3>
+          <p class="method-steps__text">Acompanhar experimentos, protótipos, indicadores e aprendizados.</p>
+        </li>
+        <li class="method-steps__item">
+          <h3 class="method-steps__title">Conectar</h3>
+          <p class="method-steps__text">Aproximar o negócio de parceiros, mercado e comunidade UniRV.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="channels" aria-labelledby="channels-title">
+    <h2 class="section-title" id="channels-title">Atendimento institucional</h2>
+    <span class="title-strokes title-strokes--muted" aria-hidden="true"></span>
+    <div class="info-cards info-cards--channels">
+      {% include "components/about_card.html" with variant="channel" icon="images/about/channel-contact.svg" title="Fale Conosco" text="Envie dúvidas sobre programas, parcerias e atendimento." href=site.links.fale_conosco %}
+      {% include "components/about_card.html" with variant="channel" icon="images/about/channel-ombudsman.svg" title="Ouvidoria" text="Registre manifestações, elogios, sugestões ou solicitações." href=site.links.ouvidoria %}
+      {% include "components/about_card.html" with variant="channel" icon="images/about/channel-accessibility.svg" title="Acessibilidade" text="Registre manifestações, elogios, sugestões ou solicitações." href=site.links.acessibilidade %}
+    </div>
+  </section>
 {% endblock %}
