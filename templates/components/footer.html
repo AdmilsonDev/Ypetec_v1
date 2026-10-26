@@ -1,0 +1,44 @@
+{% load static %}
+<footer class="site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__about">
+      <img class="site-footer__logo" src="{% static 'images/brand/logo-footer.svg' %}" alt="Ypetec - Incubadora de empresas da UniRV" width="288" height="100">
+      <p>A YpeTec, incubadora de empresas da UniRV, vinculada à Pró-Reitoria de Pesquisa e Inovação - PRPI, conecta o conhecimento produzido na Universidade com o setor produtivo. Sediada no Centro de Inovação, Pesquisa e Pós-Graduação - AgroHub UniRV, a incubadora oferece um ambiente dedicado ao suporte de startups e novos empreendimentos, atendendo tanto a comunidade acadêmica quanto o público externo.</p>
+    </div>
+
+    <div class="site-footer__contact">
+      <h2 class="site-footer__title">Contato</h2>
+      <ul class="footer-contacts">
+        <li class="footer-contacts__item">
+          <img src="{% static 'images/icons/footer-phone.svg' %}" alt="" width="42" height="42">
+          <span><strong>Telefone</strong><br><a href="{{ site.phone_href }}">{{ site.phone_footer }}</a></span>
+        </li>
+        <li class="footer-contacts__item">
+          <img src="{% static 'images/icons/footer-email.svg' %}" alt="" width="35" height="33">
+          <span><strong>E-mail</strong><br><a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
+        </li>
+        <li class="footer-contacts__item">
+          <img src="{% static 'images/icons/footer-location.svg' %}" alt="" width="36" height="36">
+          <span><strong>Base</strong><br>{{ site.base }}</span>
+        </li>
+      </ul>
+      {% include "components/social_links.html" %}
+    </div>
+
+    <div class="site-footer__links">
+      <h2 class="site-footer__title">Links rápidos</h2>
+      <ul class="quick-links">
+        <li><a href="{{ site.links.entrar }}">Entrar</a></li>
+        <li><a href="{{ site.links.acesso_informacao }}" target="_blank" rel="noopener">Acesso à Informação</a></li>
+        <li><a href="{{ site.links.ouvidoria }}" target="_blank" rel="noopener">Ouvidoria</a></li>
+        <li><a href="{{ site.links.acessibilidade }}" target="_blank" rel="noopener">Acessibilidade</a></li>
+        <li><a href="{{ site.links.sei }}" target="_blank" rel="noopener">Sistema (SEI)</a></li>
+        <li><a href="{{ site.links.privacidade }}">Política de Privacidade</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="site-footer__legal">{{ site.legal }}</p>
+  <img class="site-footer__divider" src="{% static 'images/icons/footer-divider.svg' %}" alt="" width="1920" height="1">
+  <p class="site-footer__copy">© Copyright 2025 <a href="{{ site.unirv_url }}" target="_blank" rel="noopener">Universidade de Rio Verde</a>. Todos os direitos reservados</p>
+</footer>

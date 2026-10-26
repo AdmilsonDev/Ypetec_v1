@@ -1,0 +1,35 @@
+{% load static %}
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="site-header__logo" href="{% url 'core:home' %}" aria-label="Ypetec - página inicial">
+      <img src="{% static 'images/brand/logo-header.svg' %}" alt="Ypetec - Incubadora de empresas da UniRV" width="173" height="60">
+    </a>
+
+    <ul class="site-header__contacts">
+      <li>
+        <a class="contact-chip" href="{{ site.phone_href }}">
+          <img src="{% static 'images/icons/header-phone.png' %}" alt="" width="40" height="37">
+          <span><strong>Fone:</strong><br>{{ site.phone_display }}</span>
+        </a>
+      </li>
+      <li>
+        <a class="contact-chip" href="mailto:{{ site.email }}">
+          <img src="{% static 'images/icons/header-email.png' %}" alt="" width="40" height="40">
+          <span><strong>Email:</strong><br>{{ site.email }}</span>
+        </a>
+      </li>
+    </ul>
+
+    <a class="btn-login" href="{{ site.links.entrar }}">Entrar</a>
+
+    <div class="site-header__social">
+      {% include "components/social_links.html" %}
+    </div>
+
+    <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Abrir menu">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+  </div>
+</header>

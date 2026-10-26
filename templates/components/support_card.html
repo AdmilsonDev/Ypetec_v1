@@ -1,0 +1,9 @@
+{% load static %}
+<article class="support-card">
+  <div class="support-card__badge">
+    <img src="{% static 'images/icons/card-circle.svg' %}" alt="" width="85" height="85">
+    <img class="support-card__icon" src="{% static icon %}" alt="" width="{{ icon_width }}" height="{{ icon_height }}">
+  </div>
+  <h3 class="support-card__title">{{ title }}</h3>
+  <p class="support-card__text">{{ text }}</p>
+</article>

@@ -1,8 +1,146 @@
-{% extends "base.html" %}
+{% extends "layouts/public.html" %}
+{% load static %}
 
-{% block body %}
-  <main class="setup-check">
-    <h1>Ypetec</h1>
-    <p>Ambiente configurado. O layout definitivo será implementado na Fase 3.</p>
-  </main>
+{% block title %}Início | Ypetec{% endblock %}
+
+{% block content %}
+  <section class="hero" aria-label="Transformamos ideias em futuro">
+    <img class="hero__image" src="{% static 'images/home/hero-banner.png' %}" width="1922" height="459"
+         alt="YpeTec | Incubadora de empresas da UniRV. Transformamos ideias em futuro. Apoio, conexão e inovação para quem quer empreender e crescer.">
+  </section>
+
+  <nav class="shortcuts" aria-label="Atalhos">
+    <ul class="shortcuts__list">
+      <li>
+        <a class="shortcuts__link" href="#">
+          <img src="{% static 'images/icons/shortcut-edit.svg' %}" alt="" width="27" height="27">
+          <span>Inscrição</span>
+        </a>
+      </li>
+      <li>
+        <a class="shortcuts__link" href="#">
+          <img src="{% static 'images/icons/shortcut-file.svg' %}" alt="" width="29" height="29">
+          <span>Regimento</span>
+        </a>
+      </li>
+      <li>
+        <a class="shortcuts__link" href="{% url 'core:startups' %}">
+          <img src="{% static 'images/icons/shortcut-rocket.svg' %}" alt="" width="29" height="29">
+          <span>Startups</span>
+        </a>
+      </li>
+      <li>
+        <a class="shortcuts__link" href="#">
+          <img src="{% static 'images/icons/shortcut-calendar.svg' %}" alt="" width="29" height="29">
+          <span>Calendário de<br>funcionamento</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="support" aria-labelledby="support-title">
+    <div class="container">
+      <h2 class="section-title" id="support-title">Como apoiamos</h2>
+      <span class="title-strokes" aria-hidden="true"></span>
+      <p class="support__lead">Da pré-incubação à pós-incubação, a Ypetec organiza atendimento, mentorias e conexões de acordo com o momento de cada iniciativa.</p>
+      <div class="support__cards">
+        {% include "components/support_card.html" with icon="images/icons/card-idea.svg" icon_width="42" icon_height="41" title="Da ideia ao problema real" text="Apoio para transformar hipóteses em experimentos, entrevistas e evidências antes de investir tempo demais na solução." %}
+        {% include "components/support_card.html" with icon="images/icons/card-target.svg" icon_width="37" icon_height="37" title="Rotina para o negócio nascer organizado" text="Orientação em modelo de negócio, proposta de valor, indicadores, planejamento financeiro e governança inicial." %}
+        {% include "components/support_card.html" with icon="images/icons/card-rocket.svg" icon_width="47" icon_height="47" title="Ponte com universidade, mercado e parceiros" text="Acesso a especialistas, laboratórios, estudantes, pesquisadores e instituições que podem acelerar a aprendizagem da equipe." %}
+      </div>
+    </div>
+  </section>
+
+  <section class="stats" aria-labelledby="stats-title">
+    <div class="stats__photo" role="img" aria-label="Equipe comemorando com as mãos para o alto"></div>
+    <img class="stats__wave" src="{% static 'images/home/stats-wave.svg' %}" alt="" width="1915" height="418">
+    <div class="stats__texture" aria-hidden="true"></div>
+    <div class="stats__content">
+      <h2 class="stats__title" id="stats-title">Números que refletem conexões, aprendizado e resultados reais.</h2>
+      <ul class="stats__list">
+        <li class="stats__item stats__item--1">
+          <span class="stats__value">38+</span>
+          <span class="stats__label">Startups incubadas</span>
+        </li>
+        <li class="stats__divider stats__divider--1" aria-hidden="true">
+          <img src="{% static 'images/home/stats-divider.svg' %}" alt="" width="173" height="2">
+        </li>
+        <li class="stats__item stats__item--2">
+          <span class="stats__value">3</span>
+          <span class="stats__label">Trilhas de maturidade</span>
+        </li>
+        <li class="stats__divider stats__divider--2" aria-hidden="true">
+          <img src="{% static 'images/home/stats-divider.svg' %}" alt="" width="173" height="2">
+        </li>
+        <li class="stats__item stats__item--3">
+          <span class="stats__value">1+</span>
+          <span class="stats__label">Ano de atuação</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="journey" aria-labelledby="journey-title">
+    <h2 class="section-title journey__title" id="journey-title">
+      <span class="journey__title-light">Ideias evoluem.</span>
+      Negócios também
+    </h2>
+    <span class="title-strokes" aria-hidden="true"></span>
+
+    <div class="journey__stage">
+      <img class="journey__deco journey__curve--pre" src="{% static 'images/home/journey-curve-pre.svg' %}" alt="" width="267.776" height="150.258">
+      <img class="journey__deco journey__curve--inc" src="{% static 'images/home/journey-curve-inc.svg' %}" alt="" width="487.973" height="182.286">
+      <img class="journey__deco journey__curve--pos" src="{% static 'images/home/journey-curve-pos.svg' %}" alt="" width="417.19" height="70.5419">
+
+      <img class="journey__deco journey__dot journey__dot--1" src="{% static 'images/home/journey-dot.svg' %}" alt="" width="43" height="43">
+      <img class="journey__deco journey__dot journey__dot--2" src="{% static 'images/home/journey-dot.svg' %}" alt="" width="43" height="43">
+      <img class="journey__deco journey__dot journey__dot--3" src="{% static 'images/home/journey-dot.svg' %}" alt="" width="43" height="43">
+      <img class="journey__deco journey__dot journey__dot--s1" src="{% static 'images/home/journey-dot-small.svg' %}" alt="" width="16" height="16">
+      <img class="journey__deco journey__dot journey__dot--s2" src="{% static 'images/home/journey-dot-small.svg' %}" alt="" width="16" height="16">
+      <img class="journey__deco journey__dot journey__dot--s3" src="{% static 'images/home/journey-dot-small.svg' %}" alt="" width="16" height="16">
+      <img class="journey__deco journey__dot journey__dot--s4" src="{% static 'images/home/journey-dot-small.svg' %}" alt="" width="16" height="16">
+      <img class="journey__deco journey__dot journey__dot--s5" src="{% static 'images/home/journey-dot-small.svg' %}" alt="" width="16" height="16">
+      <img class="journey__deco journey__dot journey__dot--s6" src="{% static 'images/home/journey-dot-small.svg' %}" alt="" width="16" height="16">
+
+      <ol class="journey__steps">
+        <li class="journey__step journey__step--pre">
+          <h3 class="journey__step-title">Pré-incubação</h3>
+          <p>Refinar problema, público, solução, protótipo e primeiros sinais de demanda.</p>
+        </li>
+        <li class="journey__step journey__step--inc">
+          <h3 class="journey__step-title">Incubação</h3>
+          <p>Proposta mais definida e já precisam estruturar operação, mercado e crescimento.</p>
+        </li>
+        <li class="journey__step journey__step--pos">
+          <h3 class="journey__step-title">Pós-incubação</h3>
+          <p>As empresa se gradua mas continua o relacionamento com a UniRV, para acessar novas oportunidades e apoiar outras equipes empreendedoras.</p>
+        </li>
+      </ol>
+
+      <img class="journey__plants" src="{% static 'images/home/journey-plants.svg' %}" alt="Plantas em diferentes estágios de crescimento" width="1297.33" height="432.681">
+    </div>
+
+    <p class="journey__closing">A <strong>YpeTec acompanha sua empresa</strong> em cada etapa de maturidade</p>
+  </section>
+
+  <section class="startups" aria-labelledby="startups-title">
+    <h2 class="section-title section-title--md" id="startups-title">Startups incubadas</h2>
+    <span class="title-strokes title-strokes--primary" aria-hidden="true"></span>
+    <a class="startups__all" href="{% url 'core:startups' %}">Ver todas +</a>
+
+    <div class="carousel" data-carousel>
+      <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Startups anteriores">
+        <img src="{% static 'images/startups/arrow-prev.svg' %}" alt="" width="68" height="68">
+      </button>
+      <ul class="carousel__track" data-carousel-track>
+        <li class="carousel__item"><img src="{% static 'images/startups/grou.png' %}" alt="Grou Bots" width="186" height="96"></li>
+        <li class="carousel__item"><img src="{% static 'images/startups/futura-drone.png' %}" alt="Futura Drone" width="346" height="74"></li>
+        <li class="carousel__item"><img src="{% static 'images/startups/connect-mudas.png' %}" alt="Connect Mudas" width="270" height="79"></li>
+        <li class="carousel__item"><img src="{% static 'images/startups/silobot.png' %}" alt="Silobot" width="247" height="60"></li>
+      </ul>
+      <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Próximas startups">
+        <img src="{% static 'images/startups/arrow-next.svg' %}" alt="" width="68" height="68">
+      </button>
+    </div>
+  </section>
 {% endblock %}

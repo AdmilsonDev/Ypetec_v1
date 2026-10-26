@@ -68,7 +68,13 @@ docs/             Documentação de arquitetura
 
 | Rota | Nome | Situação |
 |---|---|---|
-| `/` | `core:home` | Placeholder de verificação do ambiente |
+| `/` | `core:home` | Implementada conforme o Figma (frame `1:53`) |
+| `/sobre/` | `core:about` | Placeholder |
+| `/programas/` | `core:programs` | Placeholder |
+| `/startups/` | `core:startups` | Placeholder |
+| `/contato/` | `core:contact` | Placeholder |
+
+Dados institucionais (telefone, e-mail, links externos e redes sociais) ficam centralizados em `apps/core/context_processors.py`.
 
 ## Pendências para a etapa de back-end
 

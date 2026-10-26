@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  {% include "components/topbar.html" %}
+  {% include "components/header.html" %}
+  {% include "components/main_nav.html" %}
+  <main id="conteudo">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "components/footer.html" %}
+{% endblock %}

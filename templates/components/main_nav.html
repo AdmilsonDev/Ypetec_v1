@@ -1,0 +1,15 @@
+{% load static %}
+<nav class="main-nav" id="main-nav" aria-label="Navegação principal">
+  <ul class="main-nav__list">
+    {% for item in nav_items %}
+      <li class="main-nav__item">
+        <a class="main-nav__link{% if item.active %} is-active{% endif %}" href="{% url item.route %}"{% if item.active %} aria-current="page"{% endif %}>
+          {{ item.label }}
+        </a>
+        {% if item.active %}
+          <img class="main-nav__underline" src="{% static 'images/icons/nav-underline.svg' %}" alt="" width="87.6" height="5">
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

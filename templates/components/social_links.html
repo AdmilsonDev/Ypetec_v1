@@ -1,0 +1,10 @@
+{% load static %}
+<ul class="social">
+  {% for item in site.social %}
+    <li>
+      <a class="social__link" href="{{ item.url }}" target="_blank" rel="noopener" aria-label="{{ item.name }}">
+        <img src="{% static item.icon %}" alt="" width="{{ item.width }}" height="{{ item.height }}">
+      </a>
+    </li>
+  {% endfor %}
+</ul>

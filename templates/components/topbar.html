@@ -1,0 +1,63 @@
+{% load static %}
+<div class="topbar">
+  <div class="topbar__inner">
+    <a class="access-info" href="{{ site.links.acesso_informacao }}" target="_blank" rel="noopener">
+      <span class="access-info__part access-info__part--circle"><img src="{% static 'images/brand/acesso-informacao-1.svg' %}" alt=""></span>
+      <span class="access-info__part access-info__part--stem"><img src="{% static 'images/brand/acesso-informacao-2.svg' %}" alt=""></span>
+      <span class="access-info__part access-info__part--tail"><img src="{% static 'images/brand/acesso-informacao-3.svg' %}" alt=""></span>
+      <span class="access-info__part access-info__part--dot"><img src="{% static 'images/brand/acesso-informacao-4.svg' %}" alt=""></span>
+      <span class="access-info__text">Acesso à<br>Informação</span>
+    </a>
+
+    <ul class="topbar__links">
+      <li>
+        <a class="topbar__link topbar__link--wrap" href="{{ site.links.transparencia }}">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-transparencia.svg' %}" alt="" width="17.16" height="15">
+          <span>Portal da Transparência</span>
+        </a>
+      </li>
+      <li>
+        <a class="topbar__link" href="{{ site.links.ouvidoria }}" target="_blank" rel="noopener">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-ouvidoria.svg' %}" alt="" width="12.86" height="15">
+          <span>Ouvidoria</span>
+        </a>
+      </li>
+      <li>
+        <a class="topbar__link" href="{{ site.links.fale_conosco }}" target="_blank" rel="noopener">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-fale-conosco.svg' %}" alt="" width="15.02" height="15">
+          <span>Fale Conosco</span>
+        </a>
+      </li>
+      <li class="topbar__sep" aria-hidden="true">|</li>
+      <li>
+        <button class="topbar__link" type="button" data-a11y="contrast" aria-pressed="false">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-contraste.svg' %}" alt="" width="12.86" height="15">
+          <span>Contraste</span>
+        </button>
+      </li>
+      <li>
+        <a class="topbar__link" href="{{ site.links.acessibilidade }}" target="_blank" rel="noopener">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-acessibilidade.svg' %}" alt="" width="13.94" height="15">
+          <span>Acessibilidade</span>
+        </a>
+      </li>
+      <li class="topbar__font">
+        <button class="topbar__font-btn" type="button" data-a11y="font-down" aria-label="Diminuir fonte">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-font-a.svg' %}" alt="" width="13.94" height="15">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-font-decrease.svg' %}" alt="" width="8.57" height="14.98">
+        </button>
+        <button class="topbar__font-btn" type="button" data-a11y="font-reset" aria-label="Fonte padrão">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-font-a.svg' %}" alt="" width="13.94" height="15">
+        </button>
+        <button class="topbar__font-btn" type="button" data-a11y="font-up" aria-label="Aumentar fonte">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-font-a.svg' %}" alt="" width="13.94" height="15">
+          <img class="topbar__icon" src="{% static 'images/icons/topbar-font-increase.svg' %}" alt="" width="8.58" height="15">
+        </button>
+      </li>
+      <li class="topbar__sep" aria-hidden="true">|</li>
+      <li>
+        <a class="topbar__link topbar__link--brand" href="{{ site.links.sei }}" target="_blank" rel="noopener">Incubadora Ypetec</a>
+      </li>
+    </ul>
+  </div>
+</div>
