@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import redirect, render
+
+from .forms import ContactForm
 
 
 def home(request):
@@ -18,4 +21,12 @@ def startups(request):
 
 
 def contact(request):
-    return render(request, "pages/contact.html")
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # TODO: encaminhar a mensagem (e-mail/CRM) quando o destino estiver definido.
+            messages.success(request, "Mensagem enviada! Retornaremos em breve.")
+            return redirect("core:contact")
+    else:
+        form = ContactForm()
+    return render(request, "pages/contact.html", {"form": form})

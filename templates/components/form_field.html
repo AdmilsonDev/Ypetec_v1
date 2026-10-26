@@ -1,0 +1,13 @@
+{% load static %}<div class="field{% if field.errors %} is-invalid{% endif %}">
+  <label class="field__label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+  <div class="field__box{% if textarea %} field__box--textarea{% endif %}">
+    {{ field }}
+    {% if textarea %}<img class="field__resize" src="{% static 'images/contact/resize-handler.svg' %}" alt="" width="16" height="16">{% endif %}
+  </div>
+  {% if field.field.required %}
+    <p class="field__error" id="{{ field.html_name }}-error">
+      <img src="{% static 'images/contact/alert-circle.svg' %}" alt="" width="20" height="20">
+      <span>{% if field.errors %}{{ field.errors.0 }}{% else %}{{ error_text }}{% endif %}</span>
+    </p>
+  {% endif %}
+</div>

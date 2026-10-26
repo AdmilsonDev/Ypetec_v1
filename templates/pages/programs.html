@@ -1,7 +1,108 @@
 {% extends "layouts/public.html" %}
+{% load static %}
 
 {% block title %}Programas | Ypetec{% endblock %}
 
 {% block content %}
-  {% include "components/page_placeholder.html" with title="Programas" %}
+  <section class="page-hero page-hero--tinted" aria-labelledby="page-hero-title">
+    <img class="page-hero__image page-hero__image--low" src="{% static 'images/programs/hero-trilhas.jpg' %}" alt="" width="2400" height="1600">
+    <div class="page-hero__content">
+      <h1 class="page-hero__title" id="page-hero-title">Trilhas</h1>
+      <nav class="breadcrumb breadcrumb--square" aria-label="Você está em">
+        <ol class="breadcrumb__list">
+          <li><a class="breadcrumb__item" href="{% url 'core:home' %}">Home</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true">&gt;</li>
+          <li><a class="breadcrumb__item breadcrumb__item--current" href="{% url 'core:programs' %}" aria-current="page">Trilhas</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section class="tracks" aria-labelledby="tracks-title">
+    <h2 class="section-title" id="tracks-title">Trilhas de maturidade</h2>
+    <span class="title-strokes" aria-hidden="true"></span>
+    <p class="tracks__lead">Os programas organizam mentorias, metas e conexões conforme a maturidade do projeto. O foco é aprender rápido, reduzir riscos e preparar a equipe para próximos passos.</p>
+
+    <ol class="track-cards">
+      <li class="track-card">
+        <span class="track-card__number" aria-hidden="true">1</span>
+        <div class="track-card__heading">
+          <p class="track-card__eyebrow">Ideias em validação</p>
+          <h3 class="track-card__title">Pré-incubação</h3>
+        </div>
+        <div class="track-card__body">
+          <p>Trilha para equipes que precisam refinar problema, público, solução, protótipo e primeiros sinais de demanda.</p>
+          <ul class="track-card__list">
+            <li>Diagnóstico inicial do projeto</li>
+            <li>Mentorias de descoberta de clientes</li>
+            <li>Preparação para banca de evolução</li>
+          </ul>
+        </div>
+      </li>
+      <li class="track-card">
+        <span class="track-card__number" aria-hidden="true">2</span>
+        <div class="track-card__heading">
+          <p class="track-card__eyebrow">Negócios em estruturação</p>
+          <h3 class="track-card__title">Incubação</h3>
+        </div>
+        <div class="track-card__body">
+          <p>Acompanhamento para startups que já possuem uma proposta mais definida e precisam estruturar operação, mercado e crescimento.</p>
+          <ul class="track-card__list">
+            <li>Plano de desenvolvimento acompanhado</li>
+            <li>Mentorias técnicas e de gestão</li>
+            <li>Conexões com ecossistema regional</li>
+          </ul>
+        </div>
+      </li>
+      <li class="track-card">
+        <span class="track-card__number" aria-hidden="true">3</span>
+        <div class="track-card__heading">
+          <p class="track-card__eyebrow">Empresas graduadas</p>
+          <h3 class="track-card__title">Pós-incubação</h3>
+        </div>
+        <div class="track-card__body">
+          <p>Relacionamento continuado para manter troca com a UniRV, acessar novas oportunidades e apoiar outras equipes empreendedoras.</p>
+          <ul class="track-card__list">
+            <li>Rede de empresas graduadas</li>
+            <li>Acesso a eventos e chamadas</li>
+            <li>Mentoria reversa para novas equipes</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="process" aria-labelledby="process-title">
+    <div class="process__inner">
+      <h2 class="section-title" id="process-title">Processo</h2>
+      <span class="title-strokes" aria-hidden="true"></span>
+
+      <div class="process__intro">
+        <h3 class="process__heading">Como a jornada costuma acontecer</h3>
+        <div class="process__aside">
+          <p class="process__lead">A equipe da incubadora ajusta a intensidade conforme a disponibilidade da equipe empreendedora e os objetivos definidos no diagnóstico.</p>
+          <a class="btn-primary" href="#">Iniciar Candidatura</a>
+        </div>
+      </div>
+
+      <ol class="process-steps">
+        <li class="process-step">
+          <h3 class="process-step__title">Diagnosticar</h3>
+          <p class="process-step__text">Entender maturidade, equipe, oportunidade e principais riscos do projeto.</p>
+        </li>
+        <li class="process-step">
+          <h3 class="process-step__title">Planejar</h3>
+          <p class="process-step__text">Definir metas curtas, entregas esperadas e mentorias prioritárias.</p>
+        </li>
+        <li class="process-step">
+          <h3 class="process-step__title">Executar</h3>
+          <p class="process-step__text">Acompanhar experimentos, protótipos, indicadores e aprendizados.</p>
+        </li>
+        <li class="process-step">
+          <h3 class="process-step__title">Conectar</h3>
+          <p class="process-step__text">Aproximar o negócio de parceiros, mercado e comunidade UniRV.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
 {% endblock %}

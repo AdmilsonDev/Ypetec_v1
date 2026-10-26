@@ -1,7 +1,69 @@
 {% extends "layouts/public.html" %}
+{% load static %}
 
 {% block title %}Contato | Ypetec{% endblock %}
 
 {% block content %}
-  {% include "components/page_placeholder.html" with title="Contato" %}
+  <section class="page-hero page-hero--tinted" aria-labelledby="page-hero-title">
+    <img class="page-hero__image page-hero__image--contact" src="{% static 'images/contact/hero-contato.jpg' %}" alt="" width="2400" height="1600">
+    <div class="page-hero__content">
+      <h1 class="page-hero__title" id="page-hero-title">Contato</h1>
+      <nav class="breadcrumb breadcrumb--square" aria-label="Você está em">
+        <ol class="breadcrumb__list">
+          <li><a class="breadcrumb__item" href="{% url 'core:home' %}">Home</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true">&gt;</li>
+          <li><a class="breadcrumb__item breadcrumb__item--current" href="{% url 'core:contact' %}" aria-current="page">Contato</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="contact__grid">
+      <div class="contact__form-col">
+        <h2 class="contact__title" id="contact-form-title">Contato via formulário</h2>
+
+        {% for message in messages %}
+          <p class="contact__alert" role="status">{{ message }}</p>
+        {% endfor %}
+
+        <form class="contact-form" method="post" action="{% url 'core:contact' %}" novalidate aria-labelledby="contact-form-title">
+          {% csrf_token %}
+          {% include "components/form_field.html" with field=form.name error_text="Informe seu nome completo." %}
+          {% include "components/form_field.html" with field=form.phone %}
+          {% include "components/form_field.html" with field=form.email error_text="Insira um e-mail válido" %}
+          {% include "components/form_field.html" with field=form.subject textarea=True error_text="Escreva o assunto da sua mensagem." %}
+
+          <div class="check-group{% if form.consent.errors %} is-invalid{% endif %}">
+            <div class="check">
+              {{ form.consent }}
+              <label class="check__label" for="{{ form.consent.id_for_label }}">
+                Declaro que li e concordo com os <a href="#">Termos e Condições</a> e com a <a href="{{ site.links.privacidade }}">Política de Privacidade</a> do Ypetec.
+              </label>
+            </div>
+            <p class="field__error" id="consent-error">
+              <img src="{% static 'images/contact/alert-circle.svg' %}" alt="" width="20" height="20">
+              <span>{% if form.consent.errors %}{{ form.consent.errors.0 }}{% else %}É necessário concordar com os termos para enviar.{% endif %}</span>
+            </p>
+          </div>
+
+          <button class="btn-submit" type="submit">Enviar</button>
+        </form>
+      </div>
+
+      <div class="contact__info-col">
+        <h2 class="contact__title">Contatos</h2>
+        <address class="contact__details">
+          <p><strong class="contact__label contact__label--strong">Responsável</strong>: Profª. Dr.ª Daniela Cabral</p>
+          <p><strong class="contact__label">Telefone:</strong> <a href="{{ site.phone_href }}">{{ site.phone_footer }}</a></p>
+          <p><strong class="contact__label">Endereço:</strong> Fazenda Fontes do Saber - Caixa Postal 104<br>
+            <strong class="contact__label">CEP:</strong> 75.901-970 - Rio Verde - Goiás</p>
+          <p><strong class="contact__label">Email:</strong> <a href="mailto:inovalab@unirv.edu.b">inovalab@unirv.edu.b</a></p>
+        </address>
+
+        <h2 class="contact__title contact__title--map">Localização</h2>
+        <img class="contact__map" src="{% static 'images/contact/map.jpg' %}" alt="Mapa da localização da incubadora Ypetec, na Fazenda Fontes do Saber, em Rio Verde (GO)" width="578" height="376">
+      </div>
+    </div>
+  </section>
 {% endblock %}
