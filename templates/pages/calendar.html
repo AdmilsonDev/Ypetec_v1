@@ -1,0 +1,69 @@
+{% extends "layouts/public.html" %}
+{% load static %}
+
+{% block title %}Calendário de funcionamento | Ypetec{% endblock %}
+
+{% block content %}
+  <section class="page-hero page-hero--tinted page-hero--calendar" aria-labelledby="page-hero-title">
+    <img class="page-hero__image page-hero__image--calendar" src="{% static 'images/calendar/hero-calendario.jpg' %}" alt="" width="2400" height="1600">
+    <div class="page-hero__content">
+      <h1 class="page-hero__title" id="page-hero-title">Calendário de funcionamento</h1>
+      <nav class="breadcrumb breadcrumb--square" aria-label="Você está em">
+        <ol class="breadcrumb__list">
+          <li><a class="breadcrumb__item" href="{% url 'core:home' %}">Home</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true">&gt;</li>
+          <li><a class="breadcrumb__item breadcrumb__item--current" href="{% url 'core:calendar' %}" aria-current="page">Calendário de funcionamento</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section class="calendar" aria-labelledby="calendar-title">
+    <h2 class="section-title" id="calendar-title">{{ calendar_title }}/{{ calendar_year }}</h2>
+    <span class="title-strokes" aria-hidden="true"></span>
+
+    <ul class="calendar-legend" aria-label="Legenda">
+      {% for kind, label in calendar_legend %}
+        <li class="calendar-legend__item">
+          <span class="calendar-legend__swatch calendar-legend__swatch--{{ kind }}" aria-hidden="true"></span>
+          {{ label }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <hr class="calendar__divider">
+
+    <div class="calendar__grid">
+      {% for month in calendar_months %}
+        <article class="calendar-month">
+          <h3 class="calendar-month__title">{{ month.name }}</h3>
+          <table class="calendar-month__table">
+            <caption class="visually-hidden">{{ month.name }} de {{ month.year }}</caption>
+            <thead>
+              <tr>
+                {% for letter, name in calendar_weekdays %}
+                  <th scope="col" abbr="{{ name }}"><span aria-hidden="true">{{ letter }}</span><span class="visually-hidden">{{ name }}</span></th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for week in month.weeks %}
+                <tr>
+                  {% for day in week %}
+                    <td>
+                      {% if day %}
+                        <span class="calendar-day{% if day.kind %} calendar-day--{{ day.kind }}{% endif %}"{% if day.label %} title="{{ day.label }}"{% endif %}>
+                          {{ day.number }}{% if day.label %}<span class="visually-hidden"> ({{ day.label }})</span>{% endif %}
+                        </span>
+                      {% endif %}
+                    </td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

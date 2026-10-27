@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.shortcuts import redirect, render
 
-from . import startups_data
+from . import calendar_data, startups_data
 from .forms import ContactForm
 
 
@@ -50,6 +50,20 @@ def startups(request):
             "category": category,
             "categories": startups_data.categories(),
             "filter_query": urlencode(filters),
+        },
+    )
+
+
+def calendar_page(request):
+    return render(
+        request,
+        "pages/calendar.html",
+        {
+            "calendar_title": calendar_data.TITLE,
+            "calendar_year": calendar_data.YEAR,
+            "calendar_legend": calendar_data.LEGEND,
+            "calendar_weekdays": calendar_data.WEEKDAYS,
+            "calendar_months": calendar_data.build_months(),
         },
     )
 

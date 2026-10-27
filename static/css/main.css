@@ -14,6 +14,10 @@
   --color-on-primary: #ffffff;
   --color-success: #76b82a;
   --color-error: #dc2626;
+  --color-holiday: #049ee2;
+  --color-divider: #d6d3d1;
+  --color-weekday: #d0d0d2;
+  --color-day: #636363;
   --color-field-border: #d6d3d1;
 
   --font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -442,6 +446,81 @@ button {
   position: absolute;
   left: 0;
   top: 33.5px;
+}
+
+/* Dropdown (Startups) */
+.main-nav__toggle {
+  position: relative;
+  width: 116px; /* cobre o texto e a seta */
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: var(--fs-nav);
+  font-weight: 700;
+  line-height: 25px;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.main-nav__chevron {
+  position: absolute;
+  left: 93.2px;
+  top: 13.3px;
+  width: 10.25px;
+  height: 6.27px;
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+.main-nav__item--dropdown.is-open .main-nav__chevron {
+  transform: none;
+}
+
+.main-nav__submenu {
+  position: absolute;
+  left: 0;
+  top: 46px;
+  z-index: 30;
+  min-width: 330px;
+  padding: 8px 0;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.main-nav__submenu[hidden] {
+  display: none;
+}
+
+.main-nav__sublink {
+  display: block;
+  padding: 12px 24px;
+  color: var(--color-text);
+  font-size: var(--fs-nav);
+  font-weight: 700;
+  line-height: 25px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.main-nav__sublink:hover,
+.main-nav__sublink:focus-visible {
+  background: var(--color-accent);
+  color: var(--color-primary);
+}
+
+.main-nav__sublink.is-active {
+  color: var(--color-primary);
+  box-shadow: inset 4px 0 0 var(--color-accent);
+}
+
+/* Sem JavaScript o submenu abre ao passar o mouse / focar. */
+html:not(.js) .main-nav__item--dropdown:hover .main-nav__submenu[hidden],
+html:not(.js) .main-nav__item--dropdown:focus-within .main-nav__submenu[hidden] {
+  display: block;
 }
 
 /* ==========================================================================
@@ -2007,6 +2086,182 @@ a.pagination__item:focus-visible {
 }
 
 /* ==========================================================================
+   Calendar page
+   ========================================================================== */
+.page-hero--calendar::after {
+  background-image: linear-gradient(89.6deg, rgba(253, 203, 1, 0.65) 4.6%, rgba(39, 52, 139, 0.65) 101%);
+}
+
+.page-hero--calendar .page-hero__content {
+  gap: 12px;
+  padding-top: 22px;
+}
+
+.page-hero--calendar .page-hero__title {
+  line-height: 40px;
+}
+
+.page-hero__image--calendar {
+  object-position: center 12%;
+}
+
+.calendar {
+  padding: 44px 0 232px;
+}
+
+.calendar .title-strokes {
+  margin-top: 32px;
+}
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 44px;
+  margin-top: 45px;
+}
+
+.calendar-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5625rem; /* 25px */
+  line-height: 40px;
+  color: var(--color-primary);
+}
+
+.calendar-legend__swatch {
+  flex: none;
+  width: 40.76px;
+  height: 31.8px;
+  border-radius: 10px;
+}
+
+.calendar-legend__swatch--recess,
+.calendar-day--recess {
+  background: var(--color-success);
+}
+
+.calendar-legend__swatch--holiday,
+.calendar-day--holiday {
+  background: var(--color-holiday);
+}
+
+.calendar-legend__swatch--event,
+.calendar-day--event {
+  background: var(--color-error);
+}
+
+.calendar__divider {
+  width: min(1507px, 100% - 2 * var(--gutter));
+  height: 0;
+  margin: 45px auto 0;
+  border: 0;
+  border-top: 3px solid var(--color-divider);
+}
+
+.calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 433px);
+  justify-content: center;
+  gap: 68px 29px;
+  margin-top: 36px;
+}
+
+.calendar-month {
+  height: 436px;
+  padding-top: 18.6px;
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.calendar-month__title {
+  font-size: var(--fs-4xl);
+  font-weight: 800;
+  line-height: normal;
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.calendar-month__table {
+  width: 310.5px;
+  margin: 19.7px auto 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.calendar-month__table th {
+  height: 40px;
+  color: var(--color-weekday);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 40px;
+  text-align: center;
+}
+
+.calendar-month__table td {
+  height: 49px;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.calendar-day {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 25.3px;
+  height: 28.2px;
+  border-radius: 5px;
+  color: var(--color-day);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.calendar-day--recess {
+  background: none;
+  color: var(--color-success);
+}
+
+.calendar-day--holiday,
+.calendar-day--event {
+  color: var(--color-on-primary);
+}
+
+@media (max-width: 1499px) {
+  .calendar__grid {
+    grid-template-columns: repeat(2, 433px);
+  }
+}
+
+@media (max-width: 959px) {
+  .calendar {
+    padding-bottom: 96px;
+  }
+
+  .calendar__grid {
+    grid-template-columns: min(433px, 100% - 2 * var(--gutter));
+  }
+
+  .calendar-legend__item {
+    font-size: var(--fs-lg);
+  }
+}
+
+@media (max-width: 767px) {
+  .calendar-month__title {
+    font-size: var(--fs-2xl);
+  }
+
+  .calendar-month {
+    height: auto;
+    padding-bottom: 20px;
+  }
+}
+
+/* ==========================================================================
    Placeholder pages
    ========================================================================== */
 .page-placeholder {
@@ -2206,6 +2461,33 @@ a.pagination__item:focus-visible {
   .main-nav__underline {
     top: auto;
     bottom: 6px;
+  }
+
+  .main-nav__toggle {
+    width: 100%;
+    padding: 12px 0;
+  }
+
+  .main-nav__chevron {
+    left: 98px;
+    top: 25.3px;
+  }
+
+  .main-nav__item--dropdown .main-nav__underline {
+    bottom: auto;
+    top: 42px;
+  }
+
+  .main-nav__submenu {
+    position: static;
+    min-width: 0;
+    padding: 0 0 8px 16px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .main-nav__sublink {
+    padding: 10px 12px;
   }
 
   .support__cards {

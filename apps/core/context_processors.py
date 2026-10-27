@@ -32,16 +32,37 @@ NAV_ITEMS = [
     ("home", "Início"),
     ("about", "Sobre"),
     ("programs", "Programas"),
-    ("startups", "Startups"),
+    ("startups", "Startups", [
+        ("startups", "Startups incubadas"),
+        ("calendar", "Calendário de funcionamento"),
+    ]),
     ("contact", "Contato"),
 ]
 
 
+def _nav_items(active):
+    items = []
+    for name, label, *rest in NAV_ITEMS:
+        children = [
+            {"route": f"core:{child}", "label": child_label, "active": child == active}
+            for child, child_label in (rest[0] if rest else [])
+        ]
+        items.append({
+            "name": name,
+            "route": f"core:{name}",
+            "label": label,
+            "active": name == active or any(child["active"] for child in children),
+            "children": children,
+        })
+    return items
+
+
 def _asset_version():
-    """Versão dos assets (mtime do main.css) para invalidar o cache do navegador."""
+    """Versão dos assets (mtime mais recente de CSS/JS) para invalidar o cache do navegador."""
+    static = settings.BASE_DIR / "static"
     try:
-        return int((settings.BASE_DIR / "static" / "css" / "main.css").stat().st_mtime)
-    except OSError:
+        return int(max(f.stat().st_mtime for pattern in ("css/**/*.css", "js/**/*.js") for f in static.glob(pattern)))
+    except (OSError, ValueError):
         return 0
 
 
@@ -51,8 +72,5 @@ def site(request):
     return {
         "site": SITE,
         "asset_version": _asset_version(),
-        "nav_items": [
-            {"route": f"core:{name}", "label": label, "active": name == active}
-            for name, label in NAV_ITEMS
-        ],
+        "nav_items": _nav_items(active),
     }
