@@ -1,0 +1,39 @@
+{% extends "layouts/public.html" %}
+{% load static %}
+
+{% block title %}Solicitação de incubação | Ypetec{% endblock %}
+
+{% block content %}
+  <section class="page-hero page-hero--tinted page-hero--incubation" aria-labelledby="page-hero-title">
+    <img class="page-hero__image page-hero__image--incubation" src="{% static 'images/incubation/hero-incubacao.jpg' %}" alt="" width="2400" height="1350">
+    <div class="page-hero__content">
+      <h1 class="page-hero__title" id="page-hero-title">Solicitação de incubação</h1>
+      <nav class="breadcrumb breadcrumb--square" aria-label="Você está em">
+        <ol class="breadcrumb__list">
+          <li><a class="breadcrumb__item" href="{% url 'core:home' %}">Home</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true">&gt;</li>
+          <li><a class="breadcrumb__item breadcrumb__item--current" href="{% url 'core:incubation' %}" aria-current="page">Incubação</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section class="application" aria-labelledby="application-title">
+    <h2 class="section-title" id="application-title">Formulário de solicitação de incubação</h2>
+
+    <ol class="form-steps form-steps--{% for step in steps %}{% if step.state == 'active' %}{{ step.number }}{% endif %}{% endfor %}" aria-label="Etapas do formulário">
+      {% for step in steps %}
+        <li class="form-steps__item{% if step.state %} is-{{ step.state }}{% endif %}"{% if step.state == "active" %} aria-current="step"{% endif %}>
+          <span class="form-steps__bullet" aria-hidden="true">{{ step.number }}</span>
+          <span class="form-steps__label">{{ step.label }}</span>
+        </li>
+      {% endfor %}
+    </ol>
+
+    {% for message in messages %}
+      <p class="contact__alert application__alert" role="status">{{ message }}</p>
+    {% endfor %}
+
+    {% block incubation_form %}{% endblock %}
+  </section>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "pages/incubation_base.html" %}
+{% load static %}
+
+{% block incubation_form %}
+  <form class="application-form" method="post" action="{% url 'core:incubation' %}" novalidate aria-labelledby="application-title">
+    {% csrf_token %}
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.name %}
+    </div>
+
+    <div class="application-form__row application-form__row--3">
+      {% include "components/application_field.html" with field=form.cpf %}
+      {% include "components/application_field.html" with field=form.birth_date modifier="date" %}
+      {% include "components/application_field.html" with field=form.nationality %}
+    </div>
+
+    <div class="application-form__row application-form__row--3">
+      {% include "components/application_field.html" with field=form.email %}
+      {% include "components/application_field.html" with field=form.phone %}
+      {% include "components/application_field.html" with field=form.education modifier="select" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.address %}
+    </div>
+
+    <div class="application-form__row application-form__row--3">
+      {% include "components/application_field.html" with field=form.number %}
+      {% include "components/application_field.html" with field=form.neighborhood %}
+      {% include "components/application_field.html" with field=form.zip_code %}
+    </div>
+
+    <div class="application-form__row application-form__row--2">
+      {% include "components/application_field.html" with field=form.resume_url %}
+      {% include "components/application_field.html" with field=form.role %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.dedication %}
+    </div>
+
+    <hr class="application-form__divider">
+
+    <button class="add-partner" type="button" data-add-partner>
+      <span>Adicionar sócio</span>
+      <img src="{% static 'images/incubation/plus-circle.svg' %}" alt="" width="46" height="46">
+    </button>
+
+    <div class="application-form__actions">
+      <button class="btn-step btn-step--prev" type="button" disabled>Anterior</button>
+      <button class="btn-step btn-step--next" type="submit">Próximo</button>
+    </div>
+  </form>
+{% endblock %}

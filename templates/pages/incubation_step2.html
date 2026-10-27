@@ -1,0 +1,90 @@
+{% extends "pages/incubation_base.html" %}
+{% load static %}
+
+{% block incubation_form %}
+  <form class="application-form" method="post" action="{% url 'core:incubation_step2' %}" novalidate aria-labelledby="application-title">
+    {% csrf_token %}
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.project_name %}
+    </div>
+
+    <div class="application-form__row application-form__row--3">
+      {% include "components/application_field.html" with field=form.sector %}
+      {% include "components/application_field.html" with field=form.cnpj %}
+      {% include "components/application_field.html" with field=form.website %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.problem modifier="textarea-lg" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.solution modifier="textarea-lg" %}
+    </div>
+
+    <div class="application-form__row application-form__row--split-a">
+      {% include "components/application_choices.html" with field=form.developed_by kind="pill" %}
+      {% include "components/application_choices.html" with field=form.stage kind="pill" %}
+    </div>
+
+    <div class="application-form__row application-form__row--split-b">
+      {% include "components/application_choices.html" with field=form.idea_origin kind="pill" layout="stack" %}
+      <div class="application-form__stack">
+        {% include "components/application_choices.html" with field=form.has_patent kind="pill" %}
+        {% include "components/application_field.html" with field=form.patent_number %}
+      </div>
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.environmental_impact modifier="textarea-sm" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_choices.html" with field=form.sdgs kind="check" layout="columns" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.customers modifier="textarea-sm" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.differentiation modifier="textarea-sm" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.competitors modifier="textarea-sm" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.value_proposition modifier="textarea-sm" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.revenue_sources modifier="textarea-sm" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_choices.html" with field=form.business_items kind="check" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_choices.html" with field=form.monthly_revenue kind="pill" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_choices.html" with field=form.recurring_revenue kind="pill" note="Caso possua, enviar as três últimas notas fiscais emitidas para o e-mail da" note_strong=site.email %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_choices.html" with field=form.marketing_stage kind="pill" layout="grid" %}
+    </div>
+
+    <hr class="application-form__divider">
+
+    <div class="application-form__actions">
+      <a class="btn-step btn-step--prev" href="{% url 'core:incubation' %}">Anterior</a>
+      <button class="btn-step btn-step--next" type="submit">Próximo</button>
+    </div>
+  </form>
+{% endblock %}

@@ -34,10 +34,15 @@ NAV_ITEMS = [
     ("programs", "Programas"),
     ("startups", "Startups", [
         ("startups", "Startups incubadas"),
+        ("incubation", "Incubação"),
         ("calendar", "Calendário de funcionamento"),
     ]),
     ("contact", "Contato"),
 ]
+
+
+# Páginas internas que destacam o item de menu de outra rota (etapas do formulário de incubação).
+NAV_ALIASES = {"incubation_step2": "incubation", "incubation_step3": "incubation"}
 
 
 def _nav_items(active):
@@ -69,6 +74,7 @@ def _asset_version():
 def site(request):
     match = getattr(request, "resolver_match", None)
     active = match.url_name if match and match.namespace == "core" else None
+    active = NAV_ALIASES.get(active, active)
     return {
         "site": SITE,
         "asset_version": _asset_version(),

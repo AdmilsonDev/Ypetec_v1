@@ -1,0 +1,11 @@
+{% load static %}<div class="upload{% if field.errors %} is-invalid{% endif %}" data-upload>
+  <label class="upload__box" for="{{ field.id_for_label }}">
+    <span class="visually-hidden">{{ field.label }}: escolher arquivo</span>
+    {{ field }}
+    <span class="upload__name" data-upload-name hidden></span>
+  </label>
+  <p class="field__error" id="{{ field.html_name }}-error">
+    <img src="{% static 'images/contact/alert-circle.svg' %}" alt="" width="20" height="20">
+    <span>{% if field.errors %}{{ field.errors.0 }}{% else %}Arquivo inválido.{% endif %}</span>
+  </p>
+</div>

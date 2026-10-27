@@ -1,0 +1,63 @@
+{% extends "pages/incubation_base.html" %}
+{% load static %}
+
+{% block incubation_form %}
+  <form class="application-form" method="post" action="{% url 'core:incubation_step3' %}" enctype="multipart/form-data" novalidate aria-labelledby="application-title">
+    {% csrf_token %}
+
+    <p class="application-note">Descreva um breve planejamento para o programa de incubação. Para isso, você pode considerar, por exemplo: (Quanto precisa de investimento, tempo de desenvolvimento, contratação de profissionais terceirizados, estratégia para comercialização)</p>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.year_one modifier="textarea-md" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.year_two modifier="textarea-md" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.year_three modifier="textarea-md" %}
+    </div>
+
+    <div class="application-form__row application-form__row--split-c">
+      {% include "components/application_choices.html" with field=form.attended_event kind="pill" %}
+      {% include "components/application_choices.html" with field=form.was_incubated kind="pill" %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.expectations modifier="textarea-xs" hint="( aborde a interação desejada como professores, pesquisadores e alunos, o apoio esperado da Incubadora, entre outros)." %}
+    </div>
+
+    <div class="application-form__row">
+      {% include "components/application_field.html" with field=form.found_out modifier="textarea-xs" %}
+    </div>
+
+    <div class="ifield ifield--uploads" role="group" aria-labelledby="attachments-label">
+      <p class="ifield__label" id="attachments-label">Anexos</p>
+      <div class="upload-list">
+        {% include "components/application_upload.html" with field=form.attachment_1 %}
+        {% include "components/application_upload.html" with field=form.attachment_2 %}
+      </div>
+    </div>
+
+    <hr class="application-form__divider">
+
+    <div class="application-form__actions">
+      <a class="btn-step btn-step--prev" href="{% url 'core:incubation_step2' %}">Anterior</a>
+      <button class="btn-step btn-step--next" type="submit">Finalizar</button>
+    </div>
+  </form>
+
+  {% if submitted %}
+    <dialog class="dialog" id="incubation-done" data-dialog open aria-labelledby="incubation-done-title">
+      <div class="dialog__panel">
+        <h2 class="dialog__title" id="incubation-done-title">Muito bom, você finalizou<br> o formulário!</h2>
+        <p class="dialog__text">Em breve entraremos em contato.</p>
+        <p class="dialog__signature">Equipe YpeTec</p>
+      </div>
+      <button class="dialog__close" type="button" data-dialog-close aria-label="Fechar">
+        <img src="{% static 'images/incubation/close-circle.svg' %}" alt="" width="118" height="118">
+      </button>
+    </dialog>
+  {% endif %}
+{% endblock %}

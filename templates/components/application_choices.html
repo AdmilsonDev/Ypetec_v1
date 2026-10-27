@@ -1,0 +1,21 @@
+{% load static %}<div class="ifield ifield--choice{% if field.errors %} is-invalid{% endif %}" role="group" aria-labelledby="{{ field.auto_id }}-label">
+  <p class="ifield__label" id="{{ field.auto_id }}-label">{{ field.label }}{% if field.field.required %}<span class="ifield__req" aria-hidden="true">*</span>{% endif %}</p>
+  <div class="choice-row">
+    <div class="choice-list choice-list--{{ kind }}{% if layout %} choice-list--{{ layout }}{% endif %}">
+      {% for option in field %}
+        <label class="choice choice--{{ kind }}" for="{{ option.id_for_label }}">
+          {{ option.tag }}
+          <span class="choice__mark" aria-hidden="true"></span>
+          <span class="choice__text">{{ option.choice_label }}</span>
+        </label>
+      {% endfor %}
+    </div>
+    {% if note %}
+      <p class="choice-note">{{ note }} <strong>{{ note_strong }}</strong></p>
+    {% endif %}
+  </div>
+  <p class="field__error" id="{{ field.html_name }}-error">
+    <img src="{% static 'images/contact/alert-circle.svg' %}" alt="" width="20" height="20">
+    <span>{% if field.errors %}{{ field.errors.0 }}{% else %}{{ field.field.error_messages.required }}{% endif %}</span>
+  </p>
+</div>

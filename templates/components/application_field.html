@@ -1,0 +1,11 @@
+{% load static %}<div class="ifield{% if field.errors %} is-invalid{% endif %}{% if modifier %} ifield--{{ modifier }}{% endif %}">
+  <label class="ifield__label" for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="ifield__req" aria-hidden="true">*</span>{% endif %}</label>
+  {% if hint %}<p class="ifield__hint">{{ hint }}</p>{% endif %}
+  <div class="ifield__box">
+    {{ field }}
+  </div>
+  <p class="field__error" id="{{ field.html_name }}-error">
+    <img src="{% static 'images/contact/alert-circle.svg' %}" alt="" width="20" height="20">
+    <span>{% if field.errors %}{{ field.errors.0 }}{% else %}{{ field.field.error_messages.required }}{% endif %}</span>
+  </p>
+</div>

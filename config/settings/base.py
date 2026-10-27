@@ -22,6 +22,9 @@ def env_bool(name, default=False):
     return env(name, str(default)).strip().lower() in {"1", "true", "yes", "on"}
 
 
+INCUBATION_SKIP_VALIDATION = False
+
+
 def env_list(name, default=""):
     return [item.strip() for item in env(name, default).split(",") if item.strip()]
 
