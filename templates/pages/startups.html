@@ -1,7 +1,90 @@
 {% extends "layouts/public.html" %}
+{% load static %}
 
 {% block title %}Startups | Ypetec{% endblock %}
 
 {% block content %}
-  {% include "components/page_placeholder.html" with title="Startups" %}
+  <section class="page-hero page-hero--tinted page-hero--startups" aria-labelledby="page-hero-title">
+    <img class="page-hero__image page-hero__image--startups" src="{% static 'images/startups/hero-startups.jpg' %}" alt="" width="2400" height="1645">
+    <div class="page-hero__content">
+      <h1 class="page-hero__title" id="page-hero-title">Startups incubadas</h1>
+      <nav class="breadcrumb breadcrumb--square" aria-label="Você está em">
+        <ol class="breadcrumb__list">
+          <li><a class="breadcrumb__item" href="{% url 'core:home' %}">Home</a></li>
+          <li class="breadcrumb__sep" aria-hidden="true">&gt;</li>
+          <li><a class="breadcrumb__item breadcrumb__item--current" href="{% url 'core:startups' %}" aria-current="page">Startups</a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <section class="startup-list" aria-labelledby="startup-list-title">
+    <h2 class="section-title" id="startup-list-title">Projetos que transformam</h2>
+    <span class="title-strokes" aria-hidden="true"></span>
+    <p class="startup-list__lead">No AgroHub, startups encontram estrutura, mentoria e conexões para desenvolver soluções inovadoras e gerar impacto real.</p>
+
+    <form class="startup-filters" method="get" action="{% url 'core:startups' %}" role="search" data-startup-filters>
+      <div class="startup-filters__search">
+        <label class="visually-hidden" for="startup-search">Buscar startups</label>
+        <input class="startup-filters__input" id="startup-search" type="search" name="q" value="{{ query }}" placeholder="Buscar startups" autocomplete="off">
+        <button class="startup-filters__submit" type="submit">
+          <img src="{% static 'images/startups/search.svg' %}" alt="" width="36" height="36">
+          <span class="visually-hidden">Buscar</span>
+        </button>
+      </div>
+      <div class="startup-filters__select">
+        <label class="visually-hidden" for="startup-category">Categoria</label>
+        <select class="startup-filters__control" id="startup-category" name="categoria">
+          <option value="">Todas as categorias</option>
+          {% for item in categories %}
+            <option value="{{ item }}"{% if item == category %} selected{% endif %}>{{ item }}</option>
+          {% endfor %}
+        </select>
+        <img class="startup-filters__chevron" src="{% static 'images/startups/chevron-down.svg' %}" alt="" width="18" height="30">
+      </div>
+      <noscript><button type="submit">Filtrar</button></noscript>
+    </form>
+
+    {% if page.object_list %}
+      <div class="startup-grid">
+        {% for startup in page.object_list %}
+          {% include "components/startup_card.html" %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="startup-list__empty" role="status">Nenhuma startup encontrada para essa busca.</p>
+    {% endif %}
+
+    {% if page.paginator.count %}
+      <nav class="pagination" aria-label="Paginação das startups">
+        {% if page.has_previous %}
+          <a class="pagination__item pagination__item--prev" href="?{% if filter_query %}{{ filter_query }}&amp;{% endif %}page={{ page.previous_page_number }}" aria-label="Página anterior">
+            <img src="{% static 'images/startups/page-prev.svg' %}" alt="" width="15" height="26">
+          </a>
+        {% else %}
+          <span class="pagination__item pagination__item--prev is-disabled" aria-hidden="true">
+            <img src="{% static 'images/startups/page-prev.svg' %}" alt="" width="15" height="26">
+          </span>
+        {% endif %}
+
+        {% for number in page.paginator.page_range %}
+          {% if number == page.number %}
+            <span class="pagination__item is-current" aria-current="page"><span class="visually-hidden">Página </span>{{ number }}</span>
+          {% else %}
+            <a class="pagination__item" href="?{% if filter_query %}{{ filter_query }}&amp;{% endif %}page={{ number }}"><span class="visually-hidden">Página </span>{{ number }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if page.has_next %}
+          <a class="pagination__item pagination__item--next" href="?{% if filter_query %}{{ filter_query }}&amp;{% endif %}page={{ page.next_page_number }}" aria-label="Próxima página">
+            <img src="{% static 'images/startups/page-next.svg' %}" alt="" width="15" height="26">
+          </a>
+        {% else %}
+          <span class="pagination__item pagination__item--next is-disabled" aria-hidden="true">
+            <img src="{% static 'images/startups/page-next.svg' %}" alt="" width="15" height="26">
+          </span>
+        {% endif %}
+      </nav>
+    {% endif %}
+  </section>
 {% endblock %}

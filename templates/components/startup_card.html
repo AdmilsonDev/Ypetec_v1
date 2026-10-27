@@ -1,0 +1,12 @@
+{% load static %}<article class="startup-card">
+  <div class="startup-card__media{% if startup.photo %} startup-card__media--photo{% endif %}">
+    <img src="{% static startup.logo %}" alt="Logo {{ startup.name }}" width="{{ startup.logo_width }}" height="{{ startup.logo_height }}" loading="lazy">
+  </div>
+  <h3 class="startup-card__name">{{ startup.name }}</h3>
+  <p class="startup-card__tag">{{ startup.category }}</p>
+  <p class="startup-card__text">{{ startup.description|linebreaksbr }}</p>
+  <a class="startup-card__link" href="#">
+    Saiba mais<span class="visually-hidden"> sobre {{ startup.name }}</span>
+    <img src="{% static 'images/startups/arrow-external.svg' %}" alt="" width="13" height="13">
+  </a>
+</article>

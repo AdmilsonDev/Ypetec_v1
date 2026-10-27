@@ -60,3 +60,28 @@ class ContactFormTests(TestCase):
         response = self.client.post(self.url, {})
         form = response.context["form"]
         self.assertEqual(set(form.errors), {"name", "email", "subject", "consent"})
+
+
+class StartupsPageTests(TestCase):
+    url = "/startups/"
+
+    def test_lists_all_startups(self):
+        response = self.client.get(self.url)
+        self.assertEqual(len(response.context["page"].object_list), 9)
+        self.assertContains(response, "Projetos que transformam")
+
+    def test_search_ignores_case_and_accents(self):
+        response = self.client.get(self.url, {"q": "AVIARIOS"})
+        self.assertEqual([s["name"] for s in response.context["page"].object_list], ["PiuTech"])
+
+    def test_category_filter(self):
+        response = self.client.get(self.url, {"categoria": "Bebidas"})
+        self.assertEqual([s["name"] for s in response.context["page"].object_list], ["TechBier"])
+
+    def test_unknown_category_is_ignored(self):
+        response = self.client.get(self.url, {"categoria": "Inexistente"})
+        self.assertEqual(len(response.context["page"].object_list), 9)
+
+    def test_empty_result_message(self):
+        response = self.client.get(self.url, {"q": "zzz"})
+        self.assertContains(response, "Nenhuma startup encontrada")
